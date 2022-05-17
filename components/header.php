@@ -3,8 +3,8 @@
     include('db_config.php');
 
     $current_user = "";
-    if(isset($_GET['user'])) {   // getting the user that is logged in
-        $current_user = mysqli_real_escape_string($conn, $_GET['user']);   // setting the user
+    if(isset($_GET['user'])) {
+        $userID = mysqli_real_escape_string($conn, $_GET['user']);
     }
 
 ?>
@@ -53,8 +53,9 @@
             
             <?php if(!$current_user): ?>
 
-                <img class="logo" src="img/logo.png">
-                <a href="index.php" class="teal-text bookstore-text">BookStore</a>
+                
+                <a href="index.php" class="teal-text bookstore-text">
+                    <img class="logo" src="img/logo.png">BookStore</a>
                 <ul id="nav-mobile" class="right hide-on-small-and-down navul">
                     <li><a href="registration.php" class="btn z-depth-0">Registration</a></li>
                     <li><a href="login.php" class="btn z-depth-0">Login</a></li>
