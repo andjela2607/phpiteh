@@ -82,6 +82,24 @@
                 $password = "";
             }
         }
+
+        if(!array_filter($errors)) {
+            $name = $_POST['name'];
+            $lastname = $_POST['lastname'];
+            $email = $_POST['email'];
+            $contact = $_POST['contact'];
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+
+            $query = "INSERT INTO user(name, lastname, email, contact, username, password) 
+                    VALUES ('$name', '$lastname', '$email', '$contact', '$username', '$password')";
+
+            if(mysqli_query($conn, $query)) {
+                header('Location: login.php');
+            } else {
+                echo 'Error: '.mysqli_error($conn);
+            }
+        }
     }
     
 
