@@ -29,6 +29,7 @@
             margin-left: 25%;
             width: 50%;
             text-align: center;
+            border-radius: 15px;
         }
         /*
         .navul {
