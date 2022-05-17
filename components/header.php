@@ -2,7 +2,7 @@
 
     include('db_config.php');
 
-    $current_user = "";
+    $userID = 0;
     if(isset($_GET['user'])) {
         $userID = mysqli_real_escape_string($conn, $_GET['user']);
     }
@@ -31,28 +31,23 @@
             text-align: center;
             border-radius: 15px;
         }
-        /*
-        .navul {
-            margin-right: 100px;
-        }
-        .logo {
+        .logo-card {
             width: 100px;
             margin: 40px auto -30px;
             display: block;
             position: relative;
-            top: -30px;
+            padding: 10px;
         }
-        .dets {
-            padding-bottom: 20px;
-        } */
+        .radius-card {
+            border-radius: 20px;
+        }
     </style>
 </head>
 <body class="teal lighten-2">
     <nav class="white header z-depth-0">
         <div class="container">
             
-            <?php if(!$current_user): ?>
-
+            <?php if($userID == 0): ?>
                 
                 <a href="index.php" class="teal-text bookstore-text">
                     <img class="logo" src="img/logo.png">BookStore</a>
@@ -63,8 +58,8 @@
 
             <?php else: ?>
 
-                <a href="index.php" class="teal-text">
-                    BookStore</a>
+                <a href="index.php" class="teal-text bookstore-text">
+                    <img class="logo" src="img/logo.png">BookStore</a>
                 <ul id="nav-mobile" class="right hide-on-small-and-down navul">
                     <li><a href="registration.php" class="btn brand z-depth-0">Add Book</a></li>
                     <li><a href="login.php" class="btn brand z-depth-0">Your Books</a></li>
