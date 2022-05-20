@@ -13,6 +13,11 @@
         $result = mysqli_query($conn, $query);
         $book = mysqli_fetch_assoc($result);
         mysqli_free_result($result);
+
+        $query = "SELECT * FROM user WHERE id = $book_user";
+        $result = mysqli_query($conn, $query);
+        $user = mysqli_fetch_assoc($result);
+        mysqli_free_result($result);
     }
 
     if(isset($_POST['delete'])) {
@@ -71,6 +76,9 @@
 
                 <?php else: ?>
                 
+                    <h6>Owner of the book: <?php echo $user['username']; ?></h6>
+                    <h6>Contact number: <?php echo $user['contact']; ?></h6>
+                    <h6 style="padding-bottom: 10px;">Email: <?php echo $user['email']; ?></h6>
 
                 <?php endif; ?>    
 
