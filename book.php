@@ -64,6 +64,7 @@
                 <h3> <?php echo $book['title']; ?></h3>
                 <h4>Author: <?php echo $book['author']; ?> </h4>
                 <h5>Category: <?php echo $book['category']; ?>  </h5>
+                <h5>Year: <?php echo $book['year']; ?>  </h5>
                 <p style="padding-bottom: 10px;"><strong>Abstract: </strong> <?php echo $book['description']; ?></p>
             
                 <?php if($book_user == $current_user_id): ?>
