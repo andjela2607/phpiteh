@@ -16,7 +16,16 @@
     }
 
     if(isset($_POST['delete'])) {
+        $book_to_delete = mysqli_real_escape_string($conn, $_POST['book']);
+        $book_to_delete_ids = explode(",", $book_to_delete);
 
+        $query = "DELETE FROM book WHERE user = $book_to_delete_ids[0] AND
+                    id = $book_to_delete_ids[1]";
+        if(mysqli_query($conn, $query)) {
+            header('Location: index.php?user='.$current_user_id);
+        } else {
+            echo 'Error: '.mysqli_error($conn);
+        }
     }
 
     if(isset($_POST['update'])) {
@@ -52,7 +61,7 @@
                 <?php if($book_user == $current_user_id): ?>
                     
                     <form action="" method="POST" style="padding-bottom: 10px;">
-                        <input type="hidden" name="id_to_delete" 
+                        <input type="hidden" name="book" 
                             value="<?php echo $book_user.",".$book_id; ?>">
                         <input type="submit" name="update" value="Change"
                             class="btn z-depth-0">
