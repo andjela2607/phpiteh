@@ -34,7 +34,10 @@
     }
 
     if(isset($_POST['update'])) {
-        
+        $book_to_update = mysqli_real_escape_string($conn, $_POST['book']);
+        $book_to_update_ids = explode(",", $book_to_update);
+
+        header('Location: update_book.php?updateid='.$book_to_update_ids[0].','.$book_to_update_ids[1]);
     }
 
 
