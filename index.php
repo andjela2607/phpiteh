@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html>
 
-    <?php include('components/header.php') ?>
+    <?php include('components/header_user.php') ?>
 
     <div class="container">
         <div class="row">
@@ -27,7 +27,8 @@
                                 <p> <?php echo htmlspecialchars($book['author']); ?></p>
                             </div>
                             <div class="card-action right-align radius-card">
-                                <a class="orange-text text-darken-2" href="book.php?id=<?php echo $book['user'].",".$book['id'].",".$userID;?>">more info</a>
+                                <a class="orange-text text-darken-2" href="book.php?id=<?php echo $book['user']
+                                                    .','.$book['id'].','.$userID?>">more info</a>
                             </div>
                         </div>
                     </div>

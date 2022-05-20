@@ -2,11 +2,6 @@
 
     include('db_config.php');
 
-    $userID = 0;
-    if(isset($_GET['user'])) {
-        $userID = mysqli_real_escape_string($conn, $_GET['user']);
-    }
-
 ?>
 
 <head>
@@ -46,9 +41,6 @@
 <body class="teal lighten-2">
     <nav class="white header z-depth-0">
         <div class="container">
-            
-            <?php if($userID == 0): ?>
-                
                 <a href="index.php" class="teal-text bookstore-text">
                     <img class="logo" src="img/logo.png">Book</a>
                 <a href="index.php" class="teal-text text-darken-4 bookstore-text">Store</a>
@@ -56,19 +48,5 @@
                     <li><a href="registration.php" class="btn z-depth-0">Registration</a></li>
                     <li><a href="login.php" class="btn z-depth-0">Login</a></li>
                 </ul>
-
-            <?php else: ?>
-
-                <a href="index.php" class="teal-text bookstore-text">
-                    <img class="logo" src="img/logo.png">Book</a>
-                <a href="index.php" class="teal-text text-darken-4 bookstore-text">Store</a>
-                <ul id="nav-mobile" class="right hide-on-small-and-down navul">
-                    <li><a href="registration.php" class="btn brand z-depth-0">Add Book</a></li>
-                    <li><a href="login.php" class="btn brand z-depth-0">Your Books</a></li>
-                    <li><a href="login.php" class="btn brand z-depth-0">Logout</a></li>
-                </ul>
-
-            <?php endif; ?>
-
         </div>
     </nav>
