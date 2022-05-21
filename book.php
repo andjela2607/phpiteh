@@ -46,7 +46,7 @@
 <!DOCTYPE html>
 <html>
 
-    <?php include('components/header_user.php') ?>
+    <?php include('components/header.php') ?>
 
     <?php if($book == null): ?>
 
