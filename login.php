@@ -12,22 +12,25 @@
         } else {
             $username = $_POST['username'];
 
+            // provera da li postoji korisnik sa tim usernamemom
             $query = "SELECT * FROM user WHERE username = '$username'";
             $result = mysqli_query($conn, $query);
             $user = mysqli_fetch_assoc($result);
             mysqli_free_result($result);
 
-            if($user== null) {
+            if($user== null) { // ako ne postoji taj korisnik
                 $errors['username'] = "User with this username does not exist!";
             } elseif (empty($_POST['password'])) {
                 $errors['password'] = "Password is required!";
-            } else {
+            } else { // ako postoji korisnik i unesena je šifra
                 $password = $_POST['password'];
 
+                // provera da li se šifre poklapaju
                 if(strcmp($password, $user['password'])) {
                     $errors['password'] = "Wrong password!";
                 } else {
                     header('Location: index.php?user='.$user['id']);
+                    // prenošenje korisnika na početnu stranu
                 }
             }
         }

@@ -2,18 +2,21 @@
     
     include('components/db_config.php');
 
+    // sve promenljive koje se nalaze u formi (sva polja forme)
     $name = $lastname = $email = $username = $password = $confirmpassword = $contact = "";
+
+    // niz u kom će za svako polje biti ispisana greška prilikom validacije
     $errors = ['name' => '', 'lastname' => '', 'username' => '', 'email' => '',
         'password' => '', 'confirmpassword' => '', 'contact' => ''];
 
-    if(isset($_POST['registration'])) {
+    if(isset($_POST['registration'])) {  // kada pritisnemo submit dugme sa nazivom registration
 
-        if(empty($_POST['name'])) {
-            $errors['name'] = 'Name is required!';
+        if(empty($_POST['name'])) {  // provera da li je prazno polje sa nazivom name
+            $errors['name'] = 'Name is required!';  // greška koja se upisuje u niz za polje name
         } else {
-            $name = $_POST['name'];
-            if(!preg_match('/^[a-zA-Z\s]+$/', $name)) {
-                $errors['name'] = 'Wrong input for the name!'; 
+            $name = $_POST['name'];  // dodela vrednosti kako bi u slučaju ispravnosti forme ostala upisana za ponovni unos
+            if(!preg_match('/^[a-zA-Z\s]+$/', $name)) {  // provera da li su samo slova i space znakovi preko Regexa
+                $errors['name'] = 'Wrong input for the name!';  // greška
                 $name = '';
             }
         }
@@ -32,7 +35,7 @@
             $errors['email'] = "Email address is required!";
         } else {
             $email = $_POST['email'];
-            if(!filter_var($email, FILTER_VALIDATE_EMAIL)) { 
+            if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {  // php validacija email adrese
                 $errors['email'] = 'Invalid email address!'; 
                 $email = '';
             }
@@ -43,12 +46,13 @@
         } else {
             $username = $_POST['username'];
 
+            // provera da li već postoji korisničko ime koje je uneto
             $query = "SELECT * FROM user WHERE username = '$username'";
             $result = mysqli_query($conn, $query);
             $usersWithSameUsername = mysqli_fetch_assoc($result);
             mysqli_free_result($result);
 
-            if($usersWithSameUsername != null) {
+            if($usersWithSameUsername != null) {  // ako niz nije prazan - imamo korisnike sa tim username
                 $errors['username'] = "User with this username already exists!";
             }
         }
@@ -57,7 +61,7 @@
             $errors['contact'] = 'Contact number is required!';
         } else {
             $contact = $_POST['contact'];
-            if(!preg_match('/^[0-9]{10}$/', $contact)) {
+            if(!preg_match('/^[0-9]{10}$/', $contact)) {  // provera da li je contact sačinjen samo od brojeva kojih ima tačno 10
                 $errors['contact'] = 'Wrong input for the contact number!'; 
                 $contact = '';
             }
@@ -67,7 +71,7 @@
             $errors['password'] = "Password is required!";
         } else {
             $password = $_POST['password']; 
-            if(strlen($password) < 8) { 
+            if(strlen($password) < 8) {   // provera da li je password kraći od 8 znakova
                 $errors['password'] = "Password must be at least 8 characters long!";
             }
         }
@@ -76,14 +80,14 @@
             $errors['confirmpassword'] = "Password confirmation is required!";
         } else {
             $confirmpassword = $_POST['confirmpassword']; 
-            if($confirmpassword != $password) { 
+            if($confirmpassword != $password) {   // provera da li se šifre slažu
                 $errors['confirmpassword'] = "Passwords do not match!";
                 $confirmpassword = $password = "";
                 $password = "";
             }
         }
 
-        if(!array_filter($errors)) {
+        if(!array_filter($errors)) {  // ako niz grešaka ima samo false vrednosti tj. prazne stringove
             $name = $_POST['name'];
             $lastname = $_POST['lastname'];
             $email = $_POST['email'];
@@ -91,11 +95,12 @@
             $username = $_POST['username'];
             $password = $_POST['password'];
 
+            // upit za unos novog korisnika u bazu
             $query = "INSERT INTO user(name, lastname, email, contact, username, password) 
                     VALUES ('$name', '$lastname', '$email', '$contact', '$username', '$password')";
 
             if(mysqli_query($conn, $query)) {
-                header('Location: login.php');
+                header('Location: login.php'); // prebacivanje korisnika na stranicu login ako je forma odgovarajuće popunjena
             } else {
                 echo 'Error: '.mysqli_error($conn);
             }
