@@ -11,7 +11,7 @@
 
     if(isset($_POST['insert'])) {
 
-        include('components/add_update_form_validation.php');
+        include('components/add_update_form_validation.php');  // unosimo validaciju
 
         if(!array_filter($errors)) {
             $title = $_POST['title'];
@@ -20,6 +20,7 @@
             $category = $_POST['category'];
             $description = $_POST['description'];
 
+            // upit za unos knjige u bazu
             $query = "INSERT INTO book(user, title, author, year, category, description) 
                     VALUES ('$userID', '$title', '$author', $year, '$category', '$description')";
 
@@ -46,6 +47,7 @@
         <!-- FORM -->
         <form class="white form" action="" method="POST">
         
+        <!-- unos forme bez submit dugmeta -->
             <?php include('components/add_update_form.php') ?>
             
             <div class="center">

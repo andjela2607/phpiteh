@@ -1,3 +1,5 @@
+<!-- Validacija za formu za dodavanje i menjanje knjiga -->
+
 <?php
 
     if(empty($_POST['title'])) {
@@ -20,10 +22,14 @@
         $errors['year'] = 'Year is required!';
     } else {
         $yearStr = $_POST['year'];
-        if(strlen($yearStr) != 4 || intval($yearStr) == 1) {
+        // gledamo da li unos ima 4 cifre
+        // i gledamo da li je unesen broj, ako nije unesen broj intval vraća 1
+        // intval ~= strtoint
+        if(strlen($yearStr) != 4 || intval($yearStr) == 1) {  
             $errors['year'] = 'Wrong input for year!';
         } else {
             $year = intval($yearStr);
+            // date("Y") trenutna godina
             if($year < 1301 || $year > date("Y")) {
                 $errors['year'] = 'Wrong input for year!';
             } 
