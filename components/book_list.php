@@ -1,4 +1,6 @@
+<!-- kod za ubacivanje knjiga na početnu stranu i stranu profila korisnika -->
 <div class="row">
+    <!-- prolazimo kroz sve knjige i unosimo ih na stranicu -->
     <?php foreach($books as $book): ?>
     	<div class="col s6 md3">
             <div class="card z-depth-0 radius-card">

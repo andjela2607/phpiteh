@@ -6,7 +6,7 @@
         $userID = mysqli_real_escape_string($conn, $_GET['user']);
     }
 
-    $query = "SELECT * FROM book WHERE user='$userID'";
+    $query = "SELECT * FROM book WHERE user='$userID'";  // vadimo samo knjige ulogovanog korisnika
     $result = mysqli_query($conn, $query);
     $books = mysqli_fetch_all($result, MYSQLI_ASSOC);
     mysqli_free_result($result);
